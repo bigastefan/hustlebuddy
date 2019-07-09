@@ -9,27 +9,27 @@ export class AccountDataService {
 
   public accountDataURL = "http://localhost:8080/account-data";
 
-  constructor(private httpClien:HttpClient) {
+  constructor(private httpClient:HttpClient) {
 
    }
 
    getAccountDatas(){
-     return this.httpClien.get<AccountData[]>(this.accountDataURL + `/all`);
+     return this.httpClient.get<AccountData[]>(this.accountDataURL + `/all`);
    }
 
    getAccountDataById(id: String) {
-     return this.httpClien.get<AccountData>(this.accountDataURL + `/${id}`);
+     return this.httpClient.get<AccountData>(this.accountDataURL + `/${id}`);
    }
 
    addAccountData(accountData: AccountData) {
-     return this.httpClien.post(this.accountDataURL + `/add`, accountData);
+     return this.httpClient.post(this.accountDataURL + `/add`, accountData);
    }
 
    updateAccountData(id: String, accountData: AccountData) {
-     return this.httpClien.put(this.accountDataURL + `/${id}`, accountData);
+     return this.httpClient.put(this.accountDataURL + `/${id}`, accountData);
    }
 
    removeAccountData(id: String) {
-     return this.httpClien.delete(this.accountDataURL + `/${id}`);
+     return this.httpClient.delete(this.accountDataURL + `/${id}`);
    }
 }

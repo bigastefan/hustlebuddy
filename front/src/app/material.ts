@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -40,6 +41,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
         MatMomentDateModule,
         MatDividerModule,
         MatCardModule,
+        MatSnackBarModule,
         MatListModule,
         MatTabsModule,
         MatInputModule,

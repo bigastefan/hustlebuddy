@@ -45,15 +45,13 @@ export class AppComponent {
         if(role == "ROLE_ADMINISTRATOR"){
           this.loggedUserType = "administrator";
         }
-        else if(role == "ROLE_ADMINISTRATor_STAFF"){
-          this.loggedUserType = "administratorstaff";
+        else if(role == "ROLE_PERSONAL_TRAINER"){
+          this.loggedUserType = "personalTrainer";
         }
-        else if(role == "ROLE_PROFESSOR"){
-          this.loggedUserType = "professor";
+        else if(role == "ROLE_CLIENT"){
+          this.loggedUserType = "cleint";
         }
-        else if(role == "ROLE_STUDENT"){
-          this.loggedUserType = "student";
-        }
+        
       });
   }
   

@@ -1,0 +1,23 @@
+/* Customs */
+
+.personal-div {
+    
+    display: flex;
+}
+
+.personal-card {
+    background-color: rgb(161, 186, 233);
+} 
+
+.personal-form {
+    margin-top: 10px;
+}
+
+.image-preview {
+    height: 80px;
+    margin: 16px 0;
+}
+  
+.image-preview img {
+    height: 100%;
+}

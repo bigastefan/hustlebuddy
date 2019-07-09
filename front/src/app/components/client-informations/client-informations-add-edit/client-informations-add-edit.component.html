@@ -1,0 +1,12 @@
+<div class="personal-div" [formGroup]="clientInformationsForm">
+    <mat-card class="personal-card">
+       <mat-card-title>Client Informations</mat-card-title>
+        <mat-form-field class="personal-form">
+            <mat-select name = "gender" formControlName="gender" placeholder="Select gender">
+            <mat-option *ngFor="let g of genders" [value]="g" >
+              {{g}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card>
+  </div>

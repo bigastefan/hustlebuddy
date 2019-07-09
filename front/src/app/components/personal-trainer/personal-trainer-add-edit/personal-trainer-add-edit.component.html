@@ -1,0 +1,24 @@
+<form [formGroup]="form" method="post">
+    <mat-grid-list cols="3">
+      <mat-grid-tile>
+        <app-account-data [parrentForm]="form"></app-account-data>
+      </mat-grid-tile>
+      <mat-grid-tile>
+      <mat-card class="personalTrainer-card">
+        <app-personal-data [parrentForm]="form"></app-personal-data>
+          <mat-form-field>
+            <input matInput name="biography" type="text" placeholder="Biography" formControlName="biography">
+          </mat-form-field><br>
+          <mat-form-field>
+              
+              <mat-select name = "packages" formControlName="packages" placeholder="Select packages">
+                <mat-option *ngFor="let p of packages" [value]="p" >
+                  {{p.packageType}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </mat-card>
+      </mat-grid-tile>
+      </mat-grid-list>
+    <button class="save" mat-raised-button color="primary" (click)= "savePersonalTrainer()">Save</button>
+  </form>

@@ -12,6 +12,12 @@ import { AdministratorComponent } from './components/administrator/administrator
 import { AdministratorAddEditComponent } from './components/administrator/administrator-add-edit/administrator-add-edit.component';
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { AccountDataComponent } from './components/account-data/account-data.component';
+import { PersonalTrainerComponent } from './components/personal-trainer/personal-trainer.component';
+import { PersonalTrainerAddEditComponent } from './components/personal-trainer/personal-trainer-add-edit/personal-trainer-add-edit.component';
+import { ClientComponent } from './components/client/client.component';
+import { ClientInformationsComponent } from './components/client-informations/client-informations.component';
+import { ClientInformationsAddEditComponent } from './components/client-informations/client-informations-add-edit/client-informations-add-edit.component';
+import { ClientAddEditComponent } from './components/client/client-add-edit/client-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { AccountDataComponent } from './components/account-data/account-data.com
     AdministratorComponent,
     AdministratorAddEditComponent,
     PersonalDataComponent,
-    AccountDataComponent
+    AccountDataComponent,
+    PersonalTrainerComponent,
+    PersonalTrainerAddEditComponent,
+    ClientComponent,
+    ClientInformationsComponent,
+    ClientInformationsAddEditComponent,
+    ClientAddEditComponent
   ],
   imports: [
     BrowserModule,
