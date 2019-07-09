@@ -1,0 +1,17 @@
+.mat-card{
+    margin: auto; 
+    margin-top: 50px;
+
+    text-align: center;
+}
+
+.mat-form-field{
+    width: 60%;
+    margin-top:40px;
+}
+
+#log{
+    margin-top: 30px;
+    margin-bottom: 70px;
+}
+

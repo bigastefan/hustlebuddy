@@ -1,0 +1,13 @@
+/* Customs */
+
+.account-div {
+    display: flex;
+}
+
+.account-card {
+    background-color: rgb(161, 186, 233);
+}
+
+.account-form {
+    margin-top: 10px;
+}

@@ -1,0 +1,44 @@
+.container {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    
+}
+
+.container .mat-drawer {
+    padding-left:20px;
+    padding-right:20px;
+    min-width: 1vw;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.table-container {
+    padding-left:1vw;
+    padding-right:1vw;
+    padding-top:0.2vw;
+    width: 80%;
+    margin:auto;
+    background-color:white;margin-top:1vw; padding-bottom:1vw;
+    height: auto;
+}
+
+.drawer-content {
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:55px;
+    padding-bottom:10px;
+}
+
+.container .mat-drawer .mat-button {
+    display:block;
+    width:80%;
+    margin-left: 7px;
+    text-align:center;
+    color:white;
+    
+}

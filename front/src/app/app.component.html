@@ -1,0 +1,44 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side" style="background-color:#3f51b5;" [class.mat-elevation-z5]="true">
+    <div class="drawer-content" >
+      <img src="assets/logo/hustlebuddy.jpg" style="width:10vw; height:auto; border-radius: 15%; margin:0vw;">
+      
+      <button *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0)"
+               color="white" style="margin-top: 2vw"mat-button routerLink="/">Profile</button>
+      <button *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0)"
+                color="white" style="margin-top: 2vw"mat-button routerLink="/admin_panel">Admin panel</button>
+      
+      <ng-container *ngIf="isLoggedIn; else elseTemplate">
+          <button style="margin-top: 2vw" mat-button (click)="onLogout()">Logout</button>
+      </ng-container>
+      <ng-template #elseTemplate>
+           <button style="margin-top: 2vw" mat-button routerLink="login">Login</button>
+      </ng-template>
+            
+    </div>
+    
+  </mat-drawer>
+  <div class="sidenav-content">
+
+    <mat-toolbar color="primary" [class.mat-elevation-z5]="true">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="drawer.toggle()">
+            <!-- <mat-icon>menu</mat-icon> -->
+          
+
+          <span>HustleBuddy</span>
+          <span class="spacer"></span>
+        </button>  
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+  </div>
+  
+  <div>
+    
+      <br>
+      <router-outlet></router-outlet>
+      
+  </div>
+  
+</mat-drawer-container>
