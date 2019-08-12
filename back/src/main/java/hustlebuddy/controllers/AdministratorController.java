@@ -51,7 +51,7 @@ public class AdministratorController {
         return new ResponseEntity<Administrator>(permission, HttpStatus.CREATED);
     }
 
-	@Secured("ROLE_ADMINISTRATOR")
+//	@Secured("ROLE_ADMINISTRATOR")
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Administrator> getAdministratorById(@PathVariable Long id) {
@@ -72,7 +72,7 @@ public class AdministratorController {
         return new ResponseEntity<Administrator>(HttpStatus.NOT_FOUND);
     }
 
-    @Secured("ROLE_ADMINISTRATOR")
+//    @Secured("ROLE_ADMINISTRATOR")
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Administrator> addAdministrator(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String administrator) throws IOException {
@@ -86,12 +86,12 @@ public class AdministratorController {
 
     @Secured("ROLE_ADMINISTRATOR")
     @RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Administrator> updateAdministrator(@PathVariable Long id, @RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String administrator) throws IOException {
+    public ResponseEntity<Administrator> updateAdministrator(@PathVariable String username, @RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String administrator) throws IOException {
     	Administrator admin = new ObjectMapper().readValue(administrator, Administrator.class);
 		if(file.isPresent()) {
 			fileService.saveProfileImage(file.get(), "administrator_" + admin.getAccountData().getUsername(), admin.getPersonalData());
 		}
-    	administratorService.updateAdministrator(id, admin);
+    	administratorService.updateAdministrator(username, admin);
         return new ResponseEntity<Administrator>(admin, HttpStatus.OK);
     }
 

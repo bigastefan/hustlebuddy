@@ -3,7 +3,7 @@
   <groupId>hustlebuddy</groupId>
   <artifactId>hustlebuddy</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>HustleBody</name>
+  <name>HustleBuddy</name>
   <packaging>war</packaging>
   
   <parent>

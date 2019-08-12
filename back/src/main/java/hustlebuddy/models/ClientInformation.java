@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ClientInformations {
+public class ClientInformation {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class ClientInformations {
 	
 	//Constructors
 	
-	public ClientInformations() {
+	public ClientInformation() {
 		
 	}
 
-	public ClientInformations(Long id, String gender, Double weight, Double height, Double chestMeasurement, Double waistMeasurement) {
+	public ClientInformation(Long id, String gender, Double weight, Double height, Double chestMeasurement, Double waistMeasurement) {
 		this.id = id;
 		this.gender = gender;
 		this.weight = weight;
@@ -37,7 +37,7 @@ public class ClientInformations {
 		this.waistMeasurement = waistMeasurement;
 	}
 
-	public ClientInformations(String gender, Double weight, Double height, Double chestMeasurement, Double waistMeasurement) {
+	public ClientInformation(String gender, Double weight, Double height, Double chestMeasurement, Double waistMeasurement) {
 		this.gender = gender;
 		this.weight = weight;
 		this.height = height;

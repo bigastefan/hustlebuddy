@@ -17,7 +17,7 @@ public class PersonalData {
 	private String name;
 	
 	@NotNull
-	private String lastName;
+	private String surname;
 	
 	private String profileImagePath;
 	
@@ -30,16 +30,16 @@ public class PersonalData {
 	
 	
 
-	public PersonalData(Long id, String name, String lastName, String profileImagePath) {
+	public PersonalData(Long id, String name, String surname, String profileImagePath) {
 		this.id = id;
 		this.name = name;
-		this.lastName = lastName;
+		this.surname = surname;
 		this.profileImagePath = profileImagePath;
 	}
 
-	public PersonalData(String name, String lastName, String profileImagePath) {
+	public PersonalData(String name, String surname, String profileImagePath) {
 		this.name = name;
-		this.lastName = lastName;
+		this.surname = surname;
 		this.profileImagePath = profileImagePath;
 	}
 
@@ -64,16 +64,13 @@ public class PersonalData {
 		this.name = name;
 	}
 
-
-	public String getLastName() {
-		return lastName;
+	public String getSurname() {
+		return surname;
 	}
 
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
-
 
 	public String getProfileImagePath() {
 		return profileImagePath;

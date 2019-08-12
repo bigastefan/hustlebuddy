@@ -57,8 +57,8 @@ public class AdministratorService {
 		}
     }
 
-    public void updateAdministrator(Long id, Administrator administrator) {
-        Optional<Administrator> admin = administratorRepository.findById(id);
+    public void updateAdministrator(String username, Administrator administrator) {
+        Optional<Administrator> admin = administratorRepository.getByUsername(username);
         if(admin.isPresent()) {
             administrator.setId(admin.get().getId());
             administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));

@@ -20,7 +20,7 @@ public class UserPermission {
 	@ManyToOne
 	private Permission permission;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
 	private AccountData accountData;
 	

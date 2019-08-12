@@ -1,5 +1,7 @@
 package hustlebuddy.services;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hustlebuddy.models.Client;
+import hustlebuddy.models.Coach;
+import hustlebuddy.repositories.ClientCustomRepository;
 import hustlebuddy.repositories.ClientRepository;
 
 @Service
@@ -15,6 +19,9 @@ public class ClientService {
 
 	@Autowired
 	ClientRepository clientRepository;
+	
+	@Autowired
+	ClientCustomRepository clientCustomRepository;
 	
 	@Autowired
     PersonalDataService personalService;
@@ -28,6 +35,8 @@ public class ClientService {
     @Autowired
 	PasswordEncoder passwordEncoder;
     
+    @Autowired
+    CoachService coachService;
 
     public Iterable<Client> getClients() {
         return clientRepository.findAll();
@@ -45,8 +54,10 @@ public class ClientService {
     public void addClient(Client client) {
     	loginService.addPermsion(client.getAccountData(), "ROLE_CLIENT");
     	client.getAccountData().setPassword(passwordEncoder.encode(client.getAccountData().getPassword()));
+    	client.setPersonalTrainer(coachService.getCoachById1(1l));
     	clientRepository.save(client);
     }
+    
     
     public void removeClient(Long id) {
         Optional<Client> client = clientRepository.findById(id);
@@ -91,5 +102,10 @@ public class ClientService {
             accountService.updateAccountData(client.getAccountData().getId(), client.getAccountData());  
             clientRepository.save(client);
         }
+    }
+    
+    public Collection<Client> searchClients(String name, String lastName, String email, String username){    	
+    	return clientCustomRepository.searchClients(name, lastName, email, username);
+		
     }
 }

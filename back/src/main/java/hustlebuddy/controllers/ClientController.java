@@ -1,6 +1,7 @@
 package hustlebuddy.controllers;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,6 +64,22 @@ public class ClientController {
         }
         return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+	@RequestMapping(value = "/search/", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Client>> searchClients(@RequestParam(required = false) String firstName,
+			@RequestParam(required = false) String lastName, @RequestParam(required = false) String email,
+			@RequestParam(required = false) String username) {
+
+		Collection<Client> clients = clientService.searchClients(firstName, lastName, email, username);
+		if(clients.size()>0) {
+			Collection<Client> foundClients = clients;
+			return new ResponseEntity<Collection<Client>>(foundClients, HttpStatus.OK);
+		}
+		else return new ResponseEntity<Collection<Client>>(HttpStatus.NO_CONTENT);
+
+	}
+
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
@@ -73,11 +92,12 @@ public class ClientController {
     }
     
     @JsonView(HideOptionalProperties.class)
+    @Transactional
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Client> addClient(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String client) throws IOException {
     	Client c = new ObjectMapper().readValue(client, Client.class);
 		if(file.isPresent()) {
-			fileService.saveProfileImage(file.get(), "administrator_" + c.getAccountData().getUsername(), c.getPersonalData());
+			fileService.saveProfileImage(file.get(), "client_" + c.getAccountData().getUsername(), c.getPersonalData());
 		}
 		clientService.addClient(c);
 		return new ResponseEntity<Client>(c, HttpStatus.CREATED);
@@ -120,7 +140,7 @@ public class ClientController {
 
 //  @Secured("ROLE_ADMINISTRATOR")
     @RequestMapping(value="/block/{id}", method=RequestMethod.DELETE)
-    public ResponseEntity<Client> BLOCKClient(@PathVariable Long id) {
+    public ResponseEntity<Client> blockClient(@PathVariable Long id) {
         try {
         	clientService.blockClient(id);
         }catch (Exception e) {

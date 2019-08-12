@@ -1,6 +1,5 @@
 package hustlebuddy.models;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import hustlebuddy.utils.View.ShowPlan;
+
 @Entity
-public class Client {
+public class Coach {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,54 +24,52 @@ public class Client {
 	
 	@NotNull
 	private String phoneNumber;
-	
-	@Temporal(TemporalType.DATE)
-	private Date birthday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade= CascadeType.ALL)
 	private AccountData accountData;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.ALL)
 	private PersonalData personalData;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private ClientInformation clientInformation;
 	
-	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REMOVE})
-	private Coach coach;
-
-	@NotNull
+	private String biography;
+	
 	private Boolean deleted = false;
+	
+	@OneToMany(mappedBy= "coach")
+	private Set<Client> client;
+	
+	
+	@JsonView(ShowPlan.class)
+	@OneToMany(mappedBy= "coach")
+	private Set<Plan> plan;
 	
 	//Constructors
 	
-	public Client() {
+	public Coach() {
 		
 	}
 
-	public Client(Long id, @NotNull String phoneNumber, Date birthday, AccountData accountData,
-			PersonalData personalData, ClientInformation clientInformation,
-			Coach coach, @NotNull Boolean deleted) {
+	public Coach(Long id, @NotNull String phoneNumber, AccountData accountData, PersonalData personalData, String biography, Boolean deleted, Set<Client> client, Set<Plan> plan) {
 		this.id = id;
 		this.phoneNumber = phoneNumber;
-		this.birthday = birthday;
 		this.accountData = accountData;
 		this.personalData = personalData;
-		this.clientInformation = clientInformation;
-		this.coach = coach;
+		this.biography = biography;
 		this.deleted = deleted;
+		this.client = client;
+		this.plan = plan;
 	}
 
-	public Client(@NotNull String phoneNumber, Date birthday, AccountData accountData, PersonalData personalData,
-			ClientInformation clientInformation, Coach coach,
-			@NotNull Boolean deleted) {
+	public Coach(@NotNull String phoneNumber, AccountData accountData, PersonalData personalData,
+			String biography, Boolean deleted, Set<Client> client, Set<Plan> plan) {
 		this.phoneNumber = phoneNumber;
-		this.birthday = birthday;
 		this.accountData = accountData;
 		this.personalData = personalData;
-		this.clientInformation = clientInformation;
-		this.coach = coach;
+		this.biography = biography;
 		this.deleted = deleted;
+		this.client = client;
+		this.plan = plan;
 	}
 
 	//Getters and Setters
@@ -81,15 +80,6 @@ public class Client {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
 	}
 
 	public AccountData getAccountData() {
@@ -108,6 +98,14 @@ public class Client {
 		this.personalData = personalData;
 	}
 
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
+
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -116,31 +114,31 @@ public class Client {
 		this.deleted = deleted;
 	}
 
-	public ClientInformation getClientInformation() {
-		return clientInformation;
+	public Set<Client> getClient() {
+		return client;
 	}
 
-	public void setClientInformation(ClientInformation clientInformation) {
-		this.clientInformation = clientInformation;
+	public void setClient(Set<Client> client) {
+		this.client = client;
 	}
 
-	public Coach getPersonalTrainer() {
-		return coach;
+	public Set<Plan> getPlan() {
+		return plan;
 	}
 
-	public void setPersonalTrainer(Coach coach) {
-		this.coach = coach;
+	public void setPlan(Set<Plan> plan) {
+		this.plan = plan;
 	}
+
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
 	
 	
 }

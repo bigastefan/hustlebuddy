@@ -6,4 +6,10 @@ public class View {
 	
 	public interface ShowUserPermission {};
 	public interface ShowAccountData {};
+	public interface ShowPersonalTrainer {};
+	public interface ShowClient {};
+	public interface ShowPlan {};
+	public interface ShowMeal {};
+	public interface ShowTraining {};
+	public interface ShowMuscleGroup {};
 }
